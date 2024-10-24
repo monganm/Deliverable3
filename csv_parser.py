@@ -1,8 +1,8 @@
-
 import os
 
 # Path to the CSV file
 file_path = 'SEC_Jamboree_1_Womens_5000_Meters_Junior_Varsity_24.csv'
+image_folder = 'images'  # Path to your images folder
 
 if not os.path.exists(file_path):
     raise FileNotFoundError(f"The file {file_path} does not exist.")
@@ -68,25 +68,6 @@ html_content = """
     <link rel="stylesheet" type="text/css" href="css/reset.css"> 
     <link rel="stylesheet" href="css/style.css">
     <title>Client Project - Results</title>
-    <!-- <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        div.athlete {
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-        }
-    </style> -->
 </head>
 <body>
     <header id="main-header">
@@ -102,70 +83,91 @@ html_content = """
         </nav>
         <h1>Event Summary</h1>
     </header>
+
+    <!-- Dark Mode Toggle Button -->
+    <div style="text-align: right; padding: 10px; background-color: #f1f1f1; border: 1px solid #000;">
+        <button id="darkModeToggle">Toggle Dark Mode</button>
+    </div>
+
+    <!-- Add center container to center all content below the nav bar -->
     <main id="content">
-        <section id="event-title">
-            <h2>SEC Jamboree #1 Womens 5000 Meters Junior Varsity</h2>
-        </section>
-        <section id="team-scores">
-            <h2>Team Scores</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Place</th>
-                        <th>Team</th>
-                        <th>Score</th>
-                    </tr>
-                </thead>
-                <tbody>
+        <div class="center-container">
+            <section id="event-title">
+                <h2>SEC Jamboree #1 Womens 5000 Meters Junior Varsity</h2>
+            </section>
+            <section id="team-scores">
+                <h2>Team Scores</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Place</th>
+                            <th>Team</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 """
 
 # Adds top 3 team scores to the HTML content
 for score in team_scores:
     if len(score) >= 3:
         html_content += f"""
-                    <tr>
-                        <td>{score[0]}</td>
-                        <td>{score[1]}</td>
-                        <td>{score[2]}</td>
-                    </tr>
+                        <tr>
+                            <td>{score[0]}</td>
+                            <td>{score[1]}</td>
+                            <td>{score[2]}</td>
+                        </tr>
         """
 
-# Closes the team scores table tag
+# Close the team score table and add individual results
 html_content += """
-                </tbody>
-            </table>
-        </section>
-        <section id="individual-results">
-            <h2>Top 3 Results</h2>
+                    </tbody>
+                </table>
+            </section>
+            <section id="individual-results">
+                <h2>Top 3 Results</h2>
 """
 
 # Creates the HTML content for top 3 individual athletes
 for result in individual_results:
-    if len(result) >= 7:  # Making sure all required data is present!!
-        athlete_link = result[3]
-        # Extracts the athlete ID from the Athlete Link URL
-        athlete_id = athlete_link.split('/')[-2]
-        image_path = f"images/{athlete_id}.jpg"
-        
+    if len(result) >= 7:
+        athlete_name = result[2]
+        athlete_id = result[3].split('/')[-2]  # Extract the Athlete ID from the link
+        image_filename = f"{athlete_id}.jpg"
+        image_path = os.path.join(image_folder, image_filename)
+
+        # Check if the image exists, else provide a default image
+        if not os.path.exists(image_path):
+            image_path = "images/default.jpg"  # Provide a default image if not found
+
         html_content += f"""
-            <div class="athlete">
-                <h3>{result[2]}</h3>
-                <p>Place: {result[0]}</p>
-                <p>Grade: {result[1]}</p>
-                <p>Time: {result[4]}</p>
-                <p>Team: {result[5]}</p>
-                <img src="{image_path}" alt="Profile Picture of {result[2]}" width="150">
-            </div>
-            <hr>
+                <div class="athlete">
+                    <h3>{athlete_name}</h3>
+                    <p>Place: {result[0]}</p>
+                    <p>Grade: {result[1]}</p>
+                    <p>Time: {result[4]}</p>
+                    <p>Team: {result[5]}</p>
+                    <img src="{image_path}" alt="Profile Picture of {athlete_name}" width="150">
+                </div>
+                <hr>
         """
 
-# Closing the individual results section and main content
+# Closing the HTML content
 html_content += """
-        </section>
+            </section>
+        </div>
     </main>
     <footer id="main-footer">
         <p>&copy; 2024 Client Project - All rights reserved.</p>
     </footer>
+
+    <!-- JavaScript for Dark Mode Toggle -->
+    <script>
+        const toggleButton = document.getElementById('darkModeToggle');
+        toggleButton.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+    </script>
 </body>
 </html>
 """

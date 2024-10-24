@@ -1,8 +1,119 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/reset.css"> 
+    <link rel="stylesheet" href="css/style.css">
+    <title>Client Project - Results</title>
 </head>
 <body>
+    <header id="main-header">
+        <nav id="main-nav">
+            <ul>
+                <li><a href="pages/mens.html">Mens</a></li>
+                <li><a href="pages/womens.html">Womens</a></li>
+                <li><a href="pages/grade9.html">Grade 9</a></li>
+                <li><a href="pages/grade10.html">Grade 10</a></li>
+                <li><a href="pages/grade11.html">Grade 11</a></li>
+                <li><a href="pages/grade12.html">Grade 12</a></li>
+            </ul>
+        </nav>
+        <h1>Event Summary</h1>
+    </header>
+
+    <!-- Dark Mode Toggle Button -->
+    <div style="text-align: right; padding: 10px; background-color: #f1f1f1; border: 1px solid #000;">
+        <button id="darkModeToggle">Toggle Dark Mode</button>
+    </div>
+
+    <!-- Add center container to center all content below the nav bar -->
+    <main id="content">
+        <div class="center-container">
+            <section id="event-title">
+                <h2>SEC Jamboree #1 Womens 5000 Meters Junior Varsity</h2>
+            </section>
+            <section id="team-scores">
+                <h2>Team Scores</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Place</th>
+                            <th>Team</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td>1</td>
+                            <td>Ypsilanti Lincoln</td>
+                            <td>22</td>
+                        </tr>
+        
+                        <tr>
+                            <td>2</td>
+                            <td>Saline</td>
+                            <td>73</td>
+                        </tr>
+        
+                        <tr>
+                            <td>3</td>
+                            <td>Dexter</td>
+                            <td>81</td>
+                        </tr>
+        
+                    </tbody>
+                </table>
+            </section>
+            <section id="individual-results">
+                <h2>Top 3 Results</h2>
+
+                <div class="athlete">
+                    <h3>Riley Provost</h3>
+                    <p>Place: 1.</p>
+                    <p>Grade: 11</p>
+                    <p>Time: 23:15.00</p>
+                    <p>Team: Saline</p>
+                    <img src="images/default.jpg" alt="Profile Picture of Riley Provost" width="150">
+                </div>
+                <hr>
+        
+                <div class="athlete">
+                    <h3>Claire Steinbrecher</h3>
+                    <p>Place: 2.</p>
+                    <p>Grade: 9</p>
+                    <p>Time: 23:18.50</p>
+                    <p>Team: Dexter</p>
+                    <img src="images/default.jpg" alt="Profile Picture of Claire Steinbrecher" width="150">
+                </div>
+                <hr>
+        
+                <div class="athlete">
+                    <h3>Mahalia Staton</h3>
+                    <p>Place: 3.</p>
+                    <p>Grade: 11</p>
+                    <p>Time: 23:20.50</p>
+                    <p>Team: Saline</p>
+                    <img src="images/default.jpg" alt="Profile Picture of Mahalia Staton" width="150">
+                </div>
+                <hr>
+        
+            </section>
+        </div>
+    </main>
+    <footer id="main-footer">
+        <p>&copy; 2024 Client Project - All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for Dark Mode Toggle -->
+    <script>
+        const toggleButton = document.getElementById('darkModeToggle');
+        toggleButton.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+    </script>
 </body>
 </html>
