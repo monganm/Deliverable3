@@ -109,10 +109,53 @@ th {
     background-color: #f9f9f9;
     font-weight: bold;
     text-transform: uppercase;
+    position: sticky; /* Make headers sticky */
+    top: 0;
+    z-index: 2; /* Ensure headers stay on top */
 }
 
 tr:nth-child(even) {
     background-color: #f2f2f2;
+}
+
+/* Dark Mode for Table Row Background */
+tr.dark-mode:nth-child(odd) {
+    background-color: #333333; /* Darker background for odd rows */
+    color: #ffffff; /* White text for better contrast */
+}
+
+tr.dark-mode:nth-child(even) {
+    background-color: #444444; /* Darker background for even rows */
+    color: #e0e0e0; /* Light gray text for better readability */
+}
+
+/* Ensure Text Color is Light in Dark Mode */
+th.dark-mode, td.dark-mode {
+    color: #e0e0e0; /* Light gray text for improved contrast */
+}
+
+/* Table Header Styling for Dark Mode */
+th.dark-mode {
+    background-color: #555555; /* Slightly lighter background for headers */
+    color: #f5f5f5; /* Ensure the header text stands out */
+}
+
+/* Collapsible section for mobile tables */
+.collapsible-section {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .collapsible-section {
+        display: block;
+        background-color: #f9f9f9;
+        padding: 10px;
+        border: 1px solid #ddd;
+    }
+
+    .non-essential {
+        display: none;
+    }
 }
 
 /* 7. Athlete Styling */
@@ -205,21 +248,23 @@ tr:nth-child(even) {
 
 /* 11. Dark Mode Styles with Improved Contrast */
 .dark-mode {
-    --bg-color: #121212;
-    --text-color: #e0e0e0;
+    --bg-color: #121212; /* Very dark background for good contrast */
+    --text-color: #f1f1f1; /* Light text color for strong contrast */
     --header-bg-color: #1e1e1e;
-    --nav-bg-color: #333;
-    --border-color: #888; /* Lightened border color for better contrast */
-    --hover-bg-color: #444; /* Lightened hover background color */
-    --table-header-color: #f5f5f5; /* Lighter text for table headers */
-    --table-row-color: #c2c2c2; /* Lighter text for table rows */
+    --nav-bg-color: #333333;
+    --border-color: #888888;
+    --hover-bg-color: #444444;
+    --table-header-color: #f5f5f5;
+    --table-row-color: #c2c2c2;
 }
 
+/* Body styling for dark mode */
 body.dark-mode {
     background-color: var(--bg-color);
-    color: var(--text-color);
+    color: var(--text-color); /* Light text on dark background */
 }
 
+/* Header and Navigation in Dark Mode */
 header.dark-mode {
     background-color: var(--header-bg-color);
 }
@@ -229,38 +274,35 @@ header.dark-mode {
 }
 
 #main-nav ul li a.dark-mode {
-    color: var(--text-color);
+    color: var(--text-color); /* Light text */
 }
 
 #main-nav ul li a.dark-mode:hover {
-    background-color: var(--hover-bg-color);
-    color: #ffffff; /* Ensure the text color remains visible */
+    background-color: var(--hover-bg-color); /* Dark hover background */
+    color: #ffffff; /* Ensure the text is visible on hover */
 }
 
+/* Table Styling for Dark Mode */
 table.dark-mode {
     border-color: var(--border-color);
     background-color: var(--header-bg-color);
-    color: var(--table-row-color);
+    color: var(--table-row-color); /* Ensure rows are light enough to read */
 }
 
 th.dark-mode {
     background-color: var(--hover-bg-color);
-    color: var(--table-header-color); /* Lighter text for better contrast */
+    color: var(--table-header-color); /* Ensure header text is visible */
 }
 
 td.dark-mode {
     background-color: var(--bg-color);
     border-color: var(--border-color);
-    color: var(--table-row-color);
+    color: var(--table-row-color); /* Ensure row text is light enough to read */
 }
 
-tr.dark-mode:nth-child(even) {
-    background-color: #222; /* Alternating row background in dark mode */
-}
-
-/* Ensure buttons and interactive elements remain visible in dark mode */
+/* Buttons and FAB (Floating Action Button) */
 .fab.dark-mode {
-    background-color: #00b894; /* Brighten floating button color */
+    background-color: #00b894; /* Bright color for contrast */
 }
 
 .fab.dark-mode:active {
@@ -281,5 +323,14 @@ tr.dark-mode:nth-child(even) {
         display: block;
         overflow-x: auto;
         white-space: nowrap; /* Avoid table cells wrapping */
+    }
+}
+
+/* 13. Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
     }
 }
